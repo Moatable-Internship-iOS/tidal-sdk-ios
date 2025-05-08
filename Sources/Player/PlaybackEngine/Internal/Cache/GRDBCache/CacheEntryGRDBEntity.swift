@@ -28,7 +28,7 @@ struct CacheEntryGRDBEntity: Codable, FetchableRecord, PersistableRecord {
 		static let size = Column(CodingKeys.size)
 	}
 
-	init(key: String, type: CacheEntryType, url: URL, lastAccessedAt: Date = Date.now, size: Int) {
+	init(key: String, type: CacheEntryType, url: URL, lastAccessedAt: Date = Date(), size: Int) {
 		self.key = key
 		self.type = type
 		self.url = url

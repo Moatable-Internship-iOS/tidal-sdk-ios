@@ -2,7 +2,7 @@ import AVFoundation
 import Foundation
 
 // MARK: - AVPlayerAsset
-
+@available(iOS 15, *)
 class AVPlayerAsset: Asset {
 	private let contentKeySession: AVContentKeySession?
 	private let contentKeySessionDelegate: AVContentKeySessionDelegate?
@@ -24,7 +24,7 @@ class AVPlayerAsset: Asset {
 }
 
 // MARK: - LiveAVPlayerAsset
-
+@available(iOS 15, *)
 final class LiveAVPlayerAsset: AVPlayerAsset {
 	required init(
 		with player: AVQueuePlayerWrapper,

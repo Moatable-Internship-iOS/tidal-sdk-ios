@@ -19,7 +19,7 @@ extension AVContentKeyRequest: KeyRequest {
 
 	func createServerPlaybackContext(for keyId: Data, using certificate: Data) async throws -> Data {
 		try await withCheckedThrowingContinuation { continuation in
-			let completionHandler: (Data?, Error?) -> Void = { spc, error in
+            let completionHandler: @Sendable (Data?, Error?) -> Void = { spc, error in
 				if let spc {
 					continuation.resume(returning: spc)
 					return
