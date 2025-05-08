@@ -12,7 +12,7 @@ let shouldIncludeDocCPlugin = environmentVariables["INCLUDE_DOCC_PLUGIN"] == "tr
 let package = Package(
 	name: "tidal-sdk-ios",
 	platforms: [
-		.iOS(.v15),
+		.iOS(.v14),
 		.macOS(.v12),
 		.tvOS(.v15),
 		.watchOS(.v7),

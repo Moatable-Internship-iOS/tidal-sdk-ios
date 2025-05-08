@@ -11,7 +11,7 @@ private enum Constants {
 }
 
 // MARK: - AVQueuePlayerWrapper
-
+@available(iOS 15, *)
 final class AVQueuePlayerWrapper: GenericMediaPlayer {
 	private let featureFlagProvider: FeatureFlagProvider
 
@@ -253,7 +253,7 @@ final class AVQueuePlayerWrapper: GenericMediaPlayer {
 }
 
 // MARK: LiveMediaPlayer
-
+@available(iOS 15, *)
 extension AVQueuePlayerWrapper: LiveMediaPlayer {
 	func loadLive(
 		_ url: URL,
@@ -284,7 +284,7 @@ extension AVQueuePlayerWrapper: LiveMediaPlayer {
 }
 
 // MARK: UCMediaPlayer
-
+@available(iOS 15, *)
 extension AVQueuePlayerWrapper: UCMediaPlayer {
 	func loadUC(
 		_ url: URL,
@@ -320,7 +320,7 @@ extension AVQueuePlayerWrapper: UCMediaPlayer {
 }
 
 // MARK: VideoPlayer
-
+@available(iOS 15, *)
 extension AVQueuePlayerWrapper: VideoPlayer {
 	func renderVideo(in view: AVPlayerLayer) {
 		queue.dispatch {
@@ -334,7 +334,7 @@ extension AVQueuePlayerWrapper: VideoPlayer {
 		}
 	}
 }
-
+@available(iOS 15, *)
 private extension AVQueuePlayerWrapper {
 	static func createPlayer(featureFlagProvider: FeatureFlagProvider) -> AVQueuePlayer {
 		let player = AVQueuePlayer()
@@ -473,7 +473,7 @@ private extension AVQueuePlayerWrapper {
 		do {
 			var formatDescriptions = [CMFormatDescription]()
 			for track in playerItem.tracks {
-				if let assetTrack = track.assetTrack {
+                if let assetTrack = await track.assetTrack {
 					try await formatDescriptions.append(contentsOf: assetTrack.load(.formatDescriptions))
 				}
 			}
@@ -513,7 +513,7 @@ private extension AVQueuePlayerWrapper {
 }
 
 // MARK: AVPlayer Monitoring
-
+@available(iOS 15, *)
 private extension AVQueuePlayerWrapper {
 	func loaded(playerItem: AVPlayerItem) {
 		queue.dispatch {
@@ -649,7 +649,7 @@ private extension AVQueuePlayerWrapper {
 }
 
 // MARK: AssetFactoryDelegate
-
+@available(iOS 15, *)
 extension AVQueuePlayerWrapper: AssetFactoryDelegate {
 	func assetFinishedDownloading(_ urlAsset: AVURLAsset, to location: URL, for cacheKey: String) {
 		queue.dispatch {
@@ -674,7 +674,7 @@ extension AVQueuePlayerWrapper: AssetFactoryDelegate {
 }
 
 // MARK: AVQueuePlayerWrapper Error Helpers
-
+@available(iOS 15, *)
 private extension AVQueuePlayerWrapper {
 	static func convertError(error: Error?, playerItem: AVPlayerItem) -> PlayerInternalError {
 		guard let error else {

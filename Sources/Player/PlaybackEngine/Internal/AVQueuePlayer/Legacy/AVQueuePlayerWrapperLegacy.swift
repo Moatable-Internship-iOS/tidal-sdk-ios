@@ -11,7 +11,7 @@ private enum Constants {
 }
 
 // MARK: - AVQueuePlayerWrapperLegacy
-
+@available(iOS 15, *)
 final class AVQueuePlayerWrapperLegacy: GenericMediaPlayer {
 	private let featureFlagProvider: FeatureFlagProvider
 	private let queue: OperationQueue
@@ -233,7 +233,7 @@ final class AVQueuePlayerWrapperLegacy: GenericMediaPlayer {
 }
 
 // MARK: LiveMediaPlayer
-
+@available(iOS 15, *)
 extension AVQueuePlayerWrapperLegacy: LiveMediaPlayer {
 	func loadLive(
 		_ url: URL,
@@ -263,7 +263,7 @@ extension AVQueuePlayerWrapperLegacy: LiveMediaPlayer {
 }
 
 // MARK: UCMediaPlayer
-
+@available(iOS 15, *)
 extension AVQueuePlayerWrapperLegacy: UCMediaPlayer {
 	func loadUC(
 		_ url: URL,
@@ -300,7 +300,7 @@ extension AVQueuePlayerWrapperLegacy: UCMediaPlayer {
 }
 
 // MARK: VideoPlayer
-
+@available(iOS 15, *)
 extension AVQueuePlayerWrapperLegacy: VideoPlayer {
 	func renderVideo(in view: AVPlayerLayer) {
 		queue.dispatch {
@@ -315,6 +315,7 @@ extension AVQueuePlayerWrapperLegacy: VideoPlayer {
 	}
 }
 
+@available(iOS 15, *)
 private extension AVQueuePlayerWrapperLegacy {
 	static func createPlayer(featureFlagProvider: FeatureFlagProvider) -> AVQueuePlayer {
 		let player = AVQueuePlayer()
@@ -406,7 +407,7 @@ private extension AVQueuePlayerWrapperLegacy {
 		do {
 			var formatDescriptions = [CMFormatDescription]()
 			for track in playerItem.tracks {
-				if let assetTrack = track.assetTrack {
+                if let assetTrack = await track.assetTrack {
 					try await formatDescriptions.append(contentsOf: assetTrack.load(.formatDescriptions))
 				}
 			}
@@ -430,7 +431,7 @@ private extension AVQueuePlayerWrapperLegacy {
 		}
 	}
 }
-
+@available(iOS 15, *)
 private extension AVQueuePlayerWrapperLegacy {
 	func loaded(playerItem: AVPlayerItem) {
 		queue.dispatch {
@@ -570,7 +571,7 @@ private extension AVQueuePlayerWrapperLegacy {
 		}
 	}
 }
-
+@available(iOS 15, *)
 private extension AVQueuePlayerWrapperLegacy {
 	static func convertError(error: Error?, playerItem: AVPlayerItem) -> PlayerInternalError {
 		guard let error else {
