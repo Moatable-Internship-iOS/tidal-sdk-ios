@@ -218,7 +218,9 @@ extension HttpClient {
 private extension HttpClient {
 	private static func createRequest(method: String, url: URL, headers: [String: String]?) -> URLRequest {
 		var request = URLRequest(url: url)
-		request.assumesHTTP3Capable = true
+        if #available(iOS 14.5, *) {
+            request.assumesHTTP3Capable = true
+        }
 		request.httpMethod = method
 		headers?.forEach { name, value in
 			request.addValue(value, forHTTPHeaderField: name)
