@@ -10,6 +10,7 @@ var PlayerWorld = PlayerWorldClient.live
 
 // MARK: - Player
 
+@available(iOS 15, *)
 public final class Player {
 	// MARK: - Singleton properties
 
@@ -96,6 +97,7 @@ public final class Player {
 	}
 }
 
+@available(iOS 15, *)
 public extension Player {
 	/// Bootstraps Player and returns the instance.
 	/// - Important: It must be called only once when initializing it so it is caller responsibility to keep the reference to it,
@@ -407,6 +409,7 @@ public extension Player {
 	}
 }
 
+@available(iOS 15, *)
 private extension Player {
 	func instantiatedPlayerEngine(_ notificationsHandler: NotificationsHandler?) -> PlayerEngine {
 		Player.newPlayerEngine(
