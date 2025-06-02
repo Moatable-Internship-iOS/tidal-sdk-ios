@@ -3,7 +3,7 @@ import Common
 import Foundation
 
 enum RequestHelper {
-	private static var retries: [String: Int?] = [:]
+	private static var retries = SynchronizedDictionary<String, Int?>()
 
 	static func createRequest<T>(
 		requestBuilder: @escaping () async throws -> RequestBuilder<T>
